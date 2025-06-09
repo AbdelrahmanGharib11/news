@@ -5,84 +5,96 @@ class AppTheme {
   static Color secondary = Color(0xffFFFFFF);
   static Color gray = Color(0xffA0A0A0);
 
-  static ThemeData darktheme = ThemeData(
-    scaffoldBackgroundColor: primary,
-
-    inputDecorationTheme: InputDecorationTheme(
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide(color: secondary),
+  static ThemeData lighttheme = ThemeData(
+    appBarTheme: AppBarTheme(
+      backgroundColor: primary,
+      foregroundColor: secondary,
+      titleTextStyle: TextStyle(
+        fontSize: 20,
+        color: secondary,
+        fontWeight: FontWeight.bold,
       ),
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(15),
-        borderSide: BorderSide(color: secondary),
-      ),
-      errorBorder: OutlineInputBorder(
-        borderSide: BorderSide(width: 1, color: secondary),
-        borderRadius: BorderRadius.circular(16),
-      ),
-      focusedErrorBorder: OutlineInputBorder(
-        borderSide: BorderSide(width: 1, color: secondary),
-        borderRadius: BorderRadius.circular(16),
-      ),
+      centerTitle: true,
+    ),
+    scaffoldBackgroundColor: secondary,
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      elevation: 0,
+      backgroundColor: primary,
+      foregroundColor: secondary,
+      shape: CircleBorder(side: BorderSide(width: 5, color: secondary)),
+    ),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: primary,
+      type: BottomNavigationBarType.fixed,
+      selectedItemColor: secondary,
+      unselectedItemColor: secondary,
     ),
     textTheme: TextTheme(
-      displayLarge: TextStyle(
+      displaySmall: TextStyle(
+        color: secondary,
+        fontSize: 24,
+        fontWeight: FontWeight.bold,
+      ),
+      displayMedium: TextStyle(color: secondary, fontSize: 22),
+      headlineLarge: TextStyle(
         color: primary,
         fontSize: 36,
-        fontFamily: 'myFonts',
-        fontWeight: FontWeight.w500, //medium font
+        fontWeight: FontWeight.bold,
       ),
-      displayMedium: TextStyle(
+      headlineSmall: TextStyle(
         color: primary,
         fontSize: 24,
-        fontFamily: 'myFonts',
-        fontWeight: FontWeight.w700, // bold font
-      ),
-      displaySmall: TextStyle(
-        color: primary,
-        fontSize: 20,
-        fontFamily: 'myFonts',
-        fontWeight: FontWeight.w700, // bold font
+        fontWeight: FontWeight.w700,
       ),
       titleLarge: TextStyle(
         color: primary,
         fontSize: 20,
-        fontFamily: 'myFonts',
-        fontWeight: FontWeight.w600, // semi-bold font
+        fontWeight: FontWeight.bold,
       ),
       titleMedium: TextStyle(
         color: primary,
-        fontSize: 20,
-        fontFamily: 'myFonts',
-        fontWeight: FontWeight.w400, // regular font
+        fontSize: 24,
+        fontWeight: FontWeight.bold,
       ),
       titleSmall: TextStyle(
         color: primary,
-        fontSize: 16,
-        fontFamily: 'myFonts',
-        fontWeight: FontWeight.w400, // regular font
+        fontSize: 12,
+        fontWeight: FontWeight.bold,
       ),
       bodyLarge: TextStyle(
         color: primary,
-        fontSize: 14,
-        fontFamily: 'myFonst',
-        fontWeight: FontWeight.w400, // regular font
+        fontSize: 16,
+        fontWeight: FontWeight.bold,
       ),
       bodyMedium: TextStyle(
         color: primary,
-        fontSize: 14,
-        fontWeight: FontWeight.w900, // Black font
+        fontSize: 16,
+        fontWeight: FontWeight.bold,
+        fontStyle: FontStyle.italic,
+        decoration: TextDecoration.underline,
+        decorationColor: AppTheme.primary,
+        decorationThickness: 1.5,
       ),
       bodySmall: TextStyle(
         color: primary,
-        fontSize: 15,
-        fontFamily: 'myFonts',
-        fontWeight: FontWeight.w400, // regular font
+        fontSize: 16,
+        fontWeight: FontWeight.w400,
       ),
-    ),
-    textButtonTheme: TextButtonThemeData(
-      style: TextButton.styleFrom(foregroundColor: primary),
+      labelLarge: TextStyle(
+        color: primary,
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+      ),
+      labelMedium: TextStyle(
+        color: primary,
+        fontSize: 14,
+        fontWeight: FontWeight.bold,
+      ),
+      labelSmall: TextStyle(
+        color: secondary,
+        fontSize: 16,
+        fontWeight: FontWeight.bold,
+      ),
     ),
   );
 }
