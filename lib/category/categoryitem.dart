@@ -13,6 +13,7 @@ class CategoryItem extends StatelessWidget {
         'assets/image/${category.imageName}.png',
         height: screendim.height * 0.25,
         width: double.infinity,
+        fit: BoxFit.fill,
       ),
     );
   }

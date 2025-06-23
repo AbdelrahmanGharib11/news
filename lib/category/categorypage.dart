@@ -3,8 +3,8 @@ import 'package:news/category/categoryitem.dart';
 import 'package:news/model/category_model.dart';
 
 class CategoryPage extends StatelessWidget {
-  const CategoryPage({super.key});
-
+  CategoryPage({super.key, required this.selectedCategoryModel});
+  void Function(CategoryModel) selectedCategoryModel;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -22,8 +22,14 @@ class CategoryPage extends StatelessWidget {
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemBuilder:
-                  (_, index) =>
-                      CategoryItem(category: CategoryModel.categories[index]),
+                  (_, index) => InkWell(
+                    onTap: () {
+                      selectedCategoryModel(CategoryModel.categories[index]);
+                    },
+                    child: CategoryItem(
+                      category: CategoryModel.categories[index],
+                    ),
+                  ),
               separatorBuilder: (_, _) => SizedBox(height: 15),
               itemCount: CategoryModel.categories.length,
             ),

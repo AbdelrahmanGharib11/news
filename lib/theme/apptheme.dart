@@ -16,7 +16,7 @@ class AppTheme {
       ),
       centerTitle: true,
     ),
-    scaffoldBackgroundColor: secondary,
+    scaffoldBackgroundColor: primary,
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       elevation: 0,
       backgroundColor: primary,
@@ -38,8 +38,8 @@ class AppTheme {
       displayMedium: TextStyle(color: secondary, fontSize: 22),
       headlineLarge: TextStyle(
         color: primary,
-        fontSize: 36,
-        fontWeight: FontWeight.bold,
+        fontSize: 20,
+        fontWeight: FontWeight.w700,
       ),
       headlineSmall: TextStyle(
         color: primary,
@@ -58,13 +58,13 @@ class AppTheme {
       ),
       titleSmall: TextStyle(
         color: primary,
-        fontSize: 12,
-        fontWeight: FontWeight.bold,
+        fontSize: 14,
+        fontWeight: FontWeight.w500,
       ),
       bodyLarge: TextStyle(
         color: primary,
         fontSize: 16,
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.w700,
       ),
       bodyMedium: TextStyle(
         color: primary,
@@ -82,7 +82,7 @@ class AppTheme {
       ),
       labelLarge: TextStyle(
         color: primary,
-        fontSize: 16,
+        fontSize: 12,
         fontWeight: FontWeight.w500,
       ),
       labelMedium: TextStyle(
@@ -92,8 +92,8 @@ class AppTheme {
       ),
       labelSmall: TextStyle(
         color: secondary,
-        fontSize: 16,
-        fontWeight: FontWeight.bold,
+        fontSize: 20,
+        fontWeight: FontWeight.w500,
       ),
     ),
   );

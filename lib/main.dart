@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news/screens/homescreen.dart';
+import 'package:news/screens/searchscreen.dart';
 import 'package:news/theme/apptheme.dart';
 
 void main() {
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: HomeScreen(),
       theme: AppTheme.lighttheme,
+      routes: {'search': (_) => SearchScreen()},
     );
   }
 }
