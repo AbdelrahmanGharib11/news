@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:news/category/categorypage.dart';
-import 'package:news/drawers/homedrawer.dart';
-import 'package:news/model/category_model.dart';
-import 'package:news/news/newspage.dart';
-import 'package:news/theme/apptheme.dart';
+import 'package:news/category/view/widgets/categorypage.dart';
+import 'package:news/home/view/widgets/homedrawer.dart';
+import 'package:news/category/data/models/category_model.dart';
+import 'package:news/news/view/widget/newspage.dart';
+import 'package:news/shared/theme/apptheme.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

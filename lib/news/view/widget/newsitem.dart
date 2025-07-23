@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:news/theme/apptheme.dart';
+import 'package:news/shared/theme/apptheme.dart';
 
 class NewsItem extends StatelessWidget {
   NewsItem({
@@ -25,17 +25,24 @@ class NewsItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
       ),
       width: double.infinity,
-      height: screendim.height * 0.4,
+      height: screendim.height * 0.41,
       child: Column(
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(8),
             clipBehavior: Clip.hardEdge,
-            child: Image.asset(
+            child: Image.network(
               newsImage,
               height: screendim.height * 0.272,
               width: double.infinity,
               fit: BoxFit.fill,
+              errorBuilder:
+                  (context, error, stackTrace) => Image.asset(
+                    'assets/image/emptyphoto.png',
+                    height: screendim.height * 0.272,
+                    width: double.infinity,
+                    fit: BoxFit.fill,
+                  ),
             ),
           ),
           SizedBox(height: 10),
@@ -43,14 +50,21 @@ class NewsItem extends StatelessWidget {
             newsText,
             style: textTheme.bodyLarge?.copyWith(color: AppTheme.secondary),
             softWrap: true,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
           ),
-          SizedBox(height: 10),
+          Spacer(),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                'By: $newsAuthor',
-                style: textTheme.labelLarge?.copyWith(color: AppTheme.gray),
-                softWrap: true,
+              Expanded(
+                flex: 2,
+                child: Text(
+                  'By: $newsAuthor',
+                  style: textTheme.labelLarge?.copyWith(color: AppTheme.gray),
+                  softWrap: true,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
 
               Spacer(),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:news/theme/apptheme.dart';
+import 'package:news/shared/theme/apptheme.dart';
 
 class HomeDrawer extends StatelessWidget {
   HomeDrawer({super.key, required this.returnToHome});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:news/category/categoryitem.dart';
-import 'package:news/model/category_model.dart';
+import 'package:news/category/view/widgets/categoryitem.dart';
+import 'package:news/category/data/models/category_model.dart';
 
 class CategoryPage extends StatelessWidget {
   CategoryPage({super.key, required this.selectedCategoryModel});

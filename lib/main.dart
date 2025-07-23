@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:news/screens/homescreen.dart';
-import 'package:news/screens/searchscreen.dart';
-import 'package:news/theme/apptheme.dart';
+import 'package:news/home/view/screens/homescreen.dart';
+import 'package:news/search/view/screen/searchscreen.dart';
+import 'package:news/shared/theme/apptheme.dart';
 
 void main() {
   runApp(const MyApp());

@@ -4,6 +4,7 @@ class AppTheme {
   static Color primary = Color(0xff171717);
   static Color secondary = Color(0xffFFFFFF);
   static Color gray = Color(0xffA0A0A0);
+  static Color red = Color.fromARGB(255, 213, 0, 0);
 
   static ThemeData lighttheme = ThemeData(
     appBarTheme: AppBarTheme(
