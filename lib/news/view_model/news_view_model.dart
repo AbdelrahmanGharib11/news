@@ -1,30 +1,22 @@
-import 'package:flutter/widgets.dart';
-import 'package:news/news/data/data_source/news_data_source.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news/news/data/models/article.dart';
-import 'package:news/news/data/models/news_response.dart';
+import 'package:news/news/data/repository/news.repo.dart';
+import 'package:news/news/view_model/news_states.dart';
+import 'package:news/shared/service/service_locator.dart';
 
-class NewsViewModel with ChangeNotifier {
-  NewsDataSource dataSource = NewsDataSource();
-  List<News_Model> news = [];
-  bool isLoading = false;
-  String? errorMessage;
+class NewsViewModel extends Cubit<NewsStates> {
+  late NewsRepo dataSource;
+  NewsViewModel() : super(NewsInitialState()) {
+    dataSource = NewsRepo(dataSource: ServiceLocator.newsDataSource);
+  }
 
   Future getNews(String sourceId) async {
-    isLoading = true;
-    notifyListeners();
+    emit(NewsLoadingState());
     try {
-      NewsResponse response = await dataSource.getNewsFromSources(sourceId);
-      news = response.articles ?? [];
-      if (response.status == 'ok' || response.articles != null) {
-        news = response.articles!;
-      } else {
-        errorMessage = 'data feteching failed';
-      }
+      final news = await dataSource.getNewsFromSources(sourceId);
+      emit(NewsSuccessState(news));
     } catch (e) {
-      errorMessage = e.toString();
+      emit(NewsErrorState(e.toString()));
     }
-
-    isLoading = false;
-    notifyListeners();
   }
 }

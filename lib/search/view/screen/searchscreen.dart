@@ -116,7 +116,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     } else if (viewModel.errorMessage != null) {
                       return Align(
                         alignment: Alignment.center,
-                        child: ErrorIndicator(message: viewModel.errorMessage!),
+                        child: ErrorIndicator(),
                       );
                     } else {
                       List<News_Model> newsList = viewModel.news;

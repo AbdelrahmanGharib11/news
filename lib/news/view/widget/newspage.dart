@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news/news/data/models/article.dart';
+import 'package:news/news/view_model/news_states.dart';
 import 'package:news/news/view_model/news_view_model.dart';
 import 'package:news/sources/data/model/source.dart';
 import 'package:news/news/view/widget/newsitem.dart';
 import 'package:news/sources/view/widgets/tabitem.dart';
+import 'package:news/sources/viewmodel/sources_states.dart';
 import 'package:news/sources/viewmodel/sources_view_model.dart';
 import 'package:news/shared/theme/apptheme.dart';
 import 'package:news/shared/widgets/error_indicator.dart';
@@ -35,23 +38,23 @@ class _NewsPageState extends State<NewsPage> {
   Widget build(BuildContext context) {
     var screendim = MediaQuery.sizeOf(context);
 
-    return ChangeNotifierProvider(
-      create: (context) => viewModel,
+    return BlocProvider<SourcesViewModel>(
+      create: (_) => viewModel,
 
-      child: Consumer<SourcesViewModel>(
-        builder: (context, viewModel, __) {
-          if (viewModel.isLoading) {
+      child: BlocBuilder<SourcesViewModel, SourcesStates>(
+        builder: (context, state) {
+          if (state is SourcesLoadingState) {
             return Align(
               alignment: Alignment.center,
               child: LoadingIndicator(),
             );
-          } else if (viewModel.errorMessage != null) {
+          } else if (state is SourcesErrorState) {
             return Align(
               alignment: Alignment.center,
-              child: ErrorIndicator(message: viewModel.errorMessage!),
+              child: ErrorIndicator(message: state.error),
             );
-          } else {
-            List<Source> sources = viewModel.source;
+          } else if (state is SourcesSuccessState) {
+            final sources = state.sources;
             newsViewModel.getNews(sources[currentIndex].id!);
             return Column(
               children: [
@@ -83,25 +86,23 @@ class _NewsPageState extends State<NewsPage> {
                 ),
                 SizedBox(height: 16),
                 Expanded(
-                  child: ChangeNotifierProvider(
-                    create: (context) => newsViewModel,
+                  child: BlocProvider(
+                    create: (_) => newsViewModel,
 
-                    child: Consumer<NewsViewModel>(
-                      builder: (context, newsViewModel, __) {
-                        if (newsViewModel.isLoading) {
+                    child: BlocBuilder<NewsViewModel, NewsStates>(
+                      builder: (context, state) {
+                        if (state is NewsLoadingState) {
                           return Align(
                             alignment: Alignment.center,
                             child: LoadingIndicator(),
                           );
-                        } else if (newsViewModel.errorMessage != null) {
+                        } else if (state is NewsErrorState) {
                           return Align(
                             alignment: Alignment.center,
-                            child: ErrorIndicator(
-                              message: newsViewModel.errorMessage!,
-                            ),
+                            child: ErrorIndicator(message: state.error),
                           );
-                        } else {
-                          List<News_Model> news = newsViewModel.news;
+                        } else if (state is NewsSuccessState) {
+                          final news = state.news;
                           return Padding(
                             padding: const EdgeInsets.symmetric(
                               horizontal: 16.0,
@@ -141,12 +142,22 @@ class _NewsPageState extends State<NewsPage> {
                               itemCount: news.length,
                             ),
                           );
+                        } else {
+                          return Align(
+                            alignment: Alignment.center,
+                            child: Text('No News Found'),
+                          );
                         }
                       },
                     ),
                   ),
                 ),
               ],
+            );
+          } else {
+            return Align(
+              alignment: Alignment.center,
+              child: Text('No Sources Found'),
             );
           }
         },
@@ -193,7 +204,7 @@ void showNewsDatails(double height, News_Model news, BuildContext context) {
                 ),
                 SizedBox(height: 10),
                 Text(
-                  news.content!,
+                  news.content ?? news.title!,
                   softWrap: true,
                   maxLines: 4,
                   overflow: TextOverflow.ellipsis,

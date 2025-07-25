@@ -1,32 +1,22 @@
-import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news/shared/service/service_locator.dart';
+import 'package:news/sources/data/repositories/sources_repo.dart';
+import 'package:news/sources/viewmodel/sources_states.dart';
 
-import 'package:news/sources/data/data_sources/sources_data_source.dart';
-import 'package:news/sources/data/model/source.dart';
-import 'package:news/sources/data/model/source_response.dart';
+class SourcesViewModel extends Cubit<SourcesStates> {
+  late SourcesRepo dataSource;
 
-class SourcesViewModel with ChangeNotifier {
-  SourcesDataSource dataSource = SourcesDataSource();
-  List<Source> source = [];
-
-  bool isLoading = false;
-  String? errorMessage;
+  SourcesViewModel() : super(SourcesInitialState()) {
+    dataSource = SourcesRepo(dataSource: ServiceLocator.sourcesDataSource);
+  }
 
   Future getSources(String category) async {
-    isLoading = true;
-    notifyListeners();
+    emit(SourcesLoadingState());
     try {
-      SourceResponse response = await dataSource.getSources(category);
-      source = response.sources ?? [];
-      if (response.status == 'ok' || response.sources != null) {
-        source = response.sources!;
-      } else {
-        errorMessage = 'data feteching failed';
-      }
+      final source = await dataSource.getSources(category);
+      emit(SourcesSuccessState(source));
     } catch (e) {
-      errorMessage = e.toString();
+      emit(SourcesErrorState(e.toString()));
     }
-
-    isLoading = false;
-    notifyListeners();
   }
 }
